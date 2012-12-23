@@ -32,6 +32,21 @@
             $this.val('');
         });
 
+        $('#toggle-all').on('change', function () {
+            var $this = $(this),
+                asComplete = $this.is(':checked');
+
+            if (asComplete) {
+                $('#todo-list li:not(.completed)').each(function (idx, el) {
+                    $('input.toggle', el).attr('checked', 'checked').trigger('change');
+                });
+            } else {
+                $('#todo-list li.completed').each(function (idx, el) {
+                    $('input.toggle', el).removeAttr('checked').trigger('change');
+                });
+            }
+        });
+
         $('#main').on('change', 'input.toggle', function () {
             var $this = $(this),
                 done = $this.is(':checked');
