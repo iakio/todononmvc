@@ -102,5 +102,12 @@
                 $(this).trigger('blur');
             }
         });
+
+        $('#clear-completed').on('click', function () {
+            $('#todo-list li.completed').remove();
+            $(this).html(
+                $(this).html().replace(/\d+/, '0')
+            ).hide();
+        });
     });
 })(window, jQuery);
