@@ -47,7 +47,7 @@
             }
         });
 
-        $('#main').on('change', 'input.toggle', function () {
+        $('#todo-list').on('change', 'input.toggle', function () {
             var $this = $(this),
                 done = $this.is(':checked');
 
@@ -85,5 +85,22 @@
             }
         });
 
+        $('#todo-list').on('dblclick', 'label', function () {
+            var $this = $(this);
+            $this.parents('li').addClass('editing');
+            $this.parents('li').find('input.edit').focus();
+        });
+
+        $('#todo-list').on('blur', 'input.edit', function () {
+            var $this = $(this);
+            $this.parents('li').find('label').html($this.val().trim());
+            $this.parents('li').removeClass('editing');
+        });
+
+        $('#todo-list').on('keypress', 'input.edit', function (event) {
+            if (event.which !== 13) {
+                $(this).trigger('blur');
+            }
+        });
     });
 })(window, jQuery);
