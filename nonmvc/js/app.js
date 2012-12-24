@@ -54,10 +54,15 @@
             if (done) {
                 $this.parents('li').addClass('completed');
                 $('#clear-completed').html(
+                    // `Clear completed (n)`
                     $('#clear-completed').html().replace(/\d+/, function (n) { return +n + 1; })
                 ).show();
                 $('#todo-count').html(
+                    // `n items left`
                     $('#todo-count').html().replace(/\d+/, function (n) {
+                        if (n === '1') {
+                            $('#toggle-all').attr('checked', 'checked');
+                        }
                         return n - 1;
                     })
                 );
@@ -76,6 +81,7 @@
                         return +n + 1;
                     })
                 );
+                $('#toggle-all').removeAttr('checked');
             }
         });
 
